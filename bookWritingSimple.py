@@ -1,5 +1,9 @@
+# imports
 import pyautogui
 from time import sleep
+
+# notFiveWideCharacters variable
+from specialCharacters import *
 
 # set up file
 file = open("bookWritingTextDocument.txt", "r")
@@ -10,34 +14,46 @@ file.close()
 
 # buffer time
 sleep(2)
-print('doing things')
+print("doing things")
 
 # loop through text file
-count = 0
+colPixelsCount = 0
+rowCount = 0
 page = ""
 
 for letter in fileText:
+    if letter in notFiveWideCharacters:
+        colPixelsCount += notFiveWideCharacters[letter]
+    else:
+        colPixelsCount += 5
+    # add one pixel to end of each letter
+    colPixelsCount += 1
+
+    # is the math right? nobody knows
+    if colPixelsCount > (56 * 2):  # 57 i's can fit on a page. *2 because of math
+        rowCount += 1
+        colPixelsCount = 0
+
     page += letter
-    count += 1
-    
+
     # when page full, copypaste page and reset page
-    if count % 264 == 0:
-        print('page is: ' + page + '\n')
+    if rowCount == 13:
+        print("page is: " + page + "\n")
         pyautogui.typewrite(page)
-        # TODO: using pagedown would be better. why tf does it not work
-        # pyautogui.press("pagedown")
         pyautogui.click()
+
+        rowCount = 0
         page = ""
 
-print('last page is: ' + page)
-pyautogui.typewrite(page)    
+
+print("last page is: " + page)
+pyautogui.typewrite(page)
 
 sleep(2)
 
 
+print("program done")
 
-
-print('program done')
-
-#266 chars per book
-
+# 266 chars per page
+# 57*2 pixels a column, maybe
+# 14 rows a page
