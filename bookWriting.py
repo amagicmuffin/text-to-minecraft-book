@@ -37,7 +37,7 @@ for letter in fileText:
     page += letter
 
     # when page full, copypaste page and reset page
-    if rowCount == 13:
+    if rowCount == 12:
         print("page is: " + page + "\n")
         pyautogui.typewrite(page)
         pyautogui.click()
