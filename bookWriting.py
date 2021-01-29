@@ -54,6 +54,5 @@ sleep(2)
 
 print("program done")
 
-# 266 chars per page
-# 57*2 pixels a column, maybe
-# 14 rows a page
+# 57 i's fit on a column
+# 14 rows fit on a page
