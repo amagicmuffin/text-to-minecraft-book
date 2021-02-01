@@ -22,6 +22,7 @@ rowCount = 0
 page = ""
 
 for letter in fileText:
+    # we're going by minecraft book "pixels" which are two of my screen pixels large
     if letter in notFiveWideCharacters:
         colPixelsCount += notFiveWideCharacters[letter]
     else:
@@ -30,7 +31,7 @@ for letter in fileText:
     colPixelsCount += 1
 
     # is the math right? nobody knows
-    if colPixelsCount > (56 * 2):  # 57 i's can fit on a page. *2 because of math
+    if colPixelsCount > (57 * 2 - 6):  # 57 i's can fit on a page. + 57 pixels of spacers - 5 max letter length - 1 spacer
         rowCount += 1
         colPixelsCount = 0
 
